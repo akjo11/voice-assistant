@@ -116,7 +116,7 @@ def assistant(command):
             mail.starttls()
 
             #login
-            mail.login('sensational@gmail.com', 'password')
+            mail.login('aflatoon@gmail.com', 'password')
 
             #send message
             mail.sendmail('Rohit Joshi', 'rohitjoshi632001@gmail.com', content)
