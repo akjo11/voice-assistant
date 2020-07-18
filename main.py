@@ -19,6 +19,10 @@ import wikipedia
 import random
 from time import strftime
 
+chrome_path="C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+webbrowser.register('chrome', None,webbrowser.BackgroundBrowser(chrome_path))
+url = "https://www.{}.com"
+
                                         
 def peppersaythis(text):
 	r1 = random.randint(1,10000000)
@@ -29,6 +33,7 @@ def peppersaythis(text):
 	playsound.playsound(filename)
 	os.remove(filename)
 
+	
 
 def mycommand():                           # obtain audio from the microphone
 	r = sr.Recognizer()
@@ -54,8 +59,22 @@ def assistant(command):
 		peppersaythis("okay")
 		sys.close()
 
+	elif command in ["browse the net", "browse the internet"]:
+		peppersaythis("what should i search?")
+		command= mycommand()
+		while(True):
+			if(command in ["backup","back up"]):
+				peppersaythis("ok")
+				break
+			elif len(command)==1:
+			    webbrowser.open_new_tab(url.format(command))
+
+				
+
 
 peppersaythis("hello, what can i do for you akshay!")
 
 while(True):
 	assistant(mycommand())
+
+	   
