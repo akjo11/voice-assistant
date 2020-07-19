@@ -19,7 +19,7 @@ import wikipedia
 import random
 from time import strftime
 
-chrome_path="C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+chrome_path="C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
 webbrowser.register('chrome', None,webbrowser.BackgroundBrowser(chrome_path))
 url = "https://www.{}.com"
 
@@ -44,7 +44,7 @@ def mycommand():                           # obtain audio from the microphone
 		said = ""
 
 	try:
-		said= r.recognize_google(audio)	
+		said= r.recognize_google(audio,language="en-in")	
 		print("you said: " + said + "\n")
 		#in case the speech is unrecognizable
 	except Exception as e :
@@ -67,7 +67,13 @@ def assistant(command):
 				peppersaythis("ok")
 				break
 			elif len(command)==1:
-			    webbrowser.open_new_tab(url.format(command))
+				webbrowser.get("chrome").open(url.format(command))
+
+			peppersaythis("ready for next command")
+			command=mycommand
+			peppersaythis(f"command received:{command}")			
+
+			    
 
 				
 
@@ -76,5 +82,3 @@ peppersaythis("hello, what can i do for you akshay!")
 
 while(True):
 	assistant(mycommand())
-
-	   
